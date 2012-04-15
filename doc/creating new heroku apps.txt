@@ -1,0 +1,45 @@
+in a folder create config.ru and ur *.rb files
+
+
+$ bundle init
+Writing new Gemfile to c:/rackheroku/Gemfile
+
+Edit the created Gemfile with your preferred text editor to let it look like this:
+
+source "http://rubygems.org"
+gem 'rack'
+
+
+$ bundle check
+The Gemfile's dependencies are satisfied
+
+Finally in the open Bash shell, type:
+
+$ bundle install
+
+
+
+Next we set up our local app to use Git. In your open Bash shell type:
+
+$ git init
+$ git add .
+$ git commit -m "Rack app first commit"
+
+Let's create our Rack app on Heroku. Type:
+
+$ heroku create
+Creating quiet-winter-3741... done, stack is bamboo-mri-1.9.2
+http://quiet-winter-3741.heroku.com/ | git@heroku.com:quiet-winter-3741.git
+Git remote heroku added
+
+
+Now let us deploy our code to Heroku. Type:
+
+$ git push heroku master
+
+
+At this stage we can rename our app to rackheroku. Type:
+
+$ heroku rename rackheroku
+
+Our app is now deployed to Heroku. Open a new browser window and type http://rackheroku.heroku.com/
