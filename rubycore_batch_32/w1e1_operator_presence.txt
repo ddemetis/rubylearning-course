@@ -1,0 +1,8 @@
+I failed the first puts x because of line 3.
+
+I remember now that = has higher precedence than or.
+
+
+If I was to be correct with my predicted results the third line should have been this instead
+
+x = y || z

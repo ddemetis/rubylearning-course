@@ -1,0 +1,23 @@
+	
+As of this lesson in Variables & assignment:
+
+    Whenever Ruby sees a bareword, it interprets it as one of three things:
+    (a) If there's an equal sign (=) to the right of the bareword, it's a local variable undergoing an assignment.
+    (b) Ruby has an internal list of keywords and a bareword could be a keyword.
+    (c) If the bareword is not (a) or (b) above, the bareword is assumed to be a method call. If no method by that name exists, Ruby raises a NameError.
+
+ruby finds that "my_string" in your program is the case (a) of above explanation.
+
+
+
+the method is never run.
+
+ruby found out that the name "my_string" refers to local variable as it matched (a)
+
+my_string.class # => give us a String.
+
+
+the def my_string can only be called using the self object as follows:
+
+self.send "my_string"
+
