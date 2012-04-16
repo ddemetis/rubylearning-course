@@ -1,7 +1,6 @@
 def convert(f)
-  celsius = (f - 32) * 5 / 9
-  sprintf("%.2f", celsius).to_f.round(2)
+  (f - 32) * 5 / 9
 end
  
-puts convert(98.6) - convert(-40)
+puts "%.2f" % (convert(98.6) - convert(-40).round(2))
 
