@@ -1,21 +1,13 @@
-#creates a line of ntimes decoracation_symbol
-def borderline(ntimes, decoration_symbol)
-	borderline = ""
-	1.upto(ntimes) do
-		borderline << decoration_symbol	
-	end
-	return borderline + "\n"
-end
 
 #adds surrounding empty ntimes spaces to source string
 def uniform_spacing(sourcestring,ntimes)
 	newstring = ""
 	spacing = "     "
-	newstring << spacing + borderline(ntimes, " ") + spacing 
+	newstring << spacing + (" " * ntimes + "\n") + spacing 
 	sourcestring.each_line do |line|
 		newstring << spacing + line + spacing
 	end	
-	newstring << spacing + borderline(ntimes, " ") + spacing 
+	newstring << spacing + (" " * ntimes + "\n") + spacing 
 	return newstring
 end
 
@@ -35,19 +27,17 @@ def multiplication_table (ntimes, heading = '', decorate = false)
 	# build the table
 	1.upto(ntimes ) do |row|
 		rows = []
+			1.upto(ntimes) do |table_field|
+				digits_size = (table_field * ntimes).to_s.size + 1
 
-		1.upto(ntimes) do |table_field|
+				# formatting based on every column's max width
+				formatting = "%" + digits_size.to_s + "d"   
 
-		digits_size = (table_field * ntimes).to_s.size + 1
+				# sum up all rows width
+				table_width += digits_size if row == 1  #control line. only count the first line widths
 
-		# formatting based on every column's max width
-		formatting = "%" + digits_size.to_s + "d"   
-
-		# sum up all rows width
-		table_width += digits_size if row == 1  #control line. only count the first line widths
-
-			rows[table_field] = sprintf formatting % (row * table_field )
-		end
+				rows[table_field] = sprintf formatting % (row * table_field )
+			end
   	rows << "\n"
 		rows.flatten!
 		rows.to_s
@@ -63,17 +53,16 @@ def multiplication_table (ntimes, heading = '', decorate = false)
 	end
 
 	#add top borderline
-	times_table << borderline(table_width, "=") if decorate
+	times_table << "=" * table_width + "\n" if decorate
 
 	#add main table
 	times_table << temporary_times_table
 
 	#add bottom borderline
-	times_table << borderline(table_width, "=") if decorate	
+	times_table << "=" * table_width + "\n" if decorate
 
 	#add decoration and uniform spacing around table
 	uniform_spacing(times_table.flatten.join, table_width)
-
 end
 
 
