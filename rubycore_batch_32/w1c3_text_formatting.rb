@@ -5,7 +5,7 @@ def uniform_spacing(sourcestring,ntimes)
 	spacing = "     "
 	newstring << spacing + (" " * ntimes) + spacing  + "\n"
 	sourcestring.each_line do |line|
-		newstring << spacing + line.chomp  + spacing + "\n"
+		newstring << "#{spacing}#{line.chomp}#{spacing}\n"
 	end	
 	newstring << spacing + (" " * ntimes) + spacing  + "\n"
 	return newstring
@@ -26,7 +26,7 @@ def multiplication_table (ntimes, heading = '', decorate = false)
 				digits_size = (column * ntimes).to_s.size + 1
 
 				# formatting based on every column's max width
-				formatting = "%" + digits_size.to_s + "d"   
+				formatting = "%#{digits_size}d"   
 
 				# sum up all rows width
 				table_width += digits_size if row < 2  #control line. only count the first line widths and zero line too

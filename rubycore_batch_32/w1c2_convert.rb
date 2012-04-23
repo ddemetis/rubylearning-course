@@ -1,11 +1,11 @@
 
 #an array of strings containing following: Menu Index, Menu Caption for source corversion
 # menu caption for target conversion, block of code (lambda) to execute upon selecting menu item
-
 def choices
+
  [ 
 	[0, "Type 0", "Exit", 
-		lambda{|degrees| degrees}
+		Proc.new {|degrees| degrees}
 	],					
 	[1, "Fahrenheit", "Celsius",
 		Proc.new {|degrees| (degrees - 32) * 5 / 9}
@@ -19,9 +19,10 @@ def choices
 	[4, "Kelvin", "Celsius",
 		Proc.new {|degrees|	degrees - 273.15}
 	],
-	[5, "Rankine", "Kelvin",
-		Proc.new {|degrees|   degrees * 5 / 9}
+	[5, "Kelvin", "Fahrenheit",
+		Proc.new {|degrees|	degrees * 9 / 5 - 459.67}
 	],
+	
 	[6, "Delisle", "Kelvin",
 		Proc.new {|degrees|	(-degrees * 2 / 3) + 373.15}
 	],
@@ -31,7 +32,10 @@ def choices
 	[8, "Reaumur", "Kelvin",
 		Proc.new {|degrees| 	degrees * 5 / 4 + 273.15}
 	],
-	[9, "Romer", "Kelvin",
+	[9, "Rankine", "Kelvin",
+		Proc.new {|degrees|   degrees * 5 / 9}
+	],
+	[10, "Romer", "Kelvin",
 		Proc.new {|degrees|	(degrees - 7.5) * 40 / 21 + 273.15}
 	]
  ]
