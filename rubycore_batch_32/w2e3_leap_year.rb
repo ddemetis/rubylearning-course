@@ -1,6 +1,6 @@
 #this works on strings only. wont work if you used to_i on string
 class String
-  def is_numeric?
+  def is_numeric_like?
     Integer self rescue false
   end
 end
@@ -17,23 +17,7 @@ end
 # show what must come true for leap year
 def leap_year?(year)
 	year = year.to_i
-	if year % 4 == 0 
-		if	year % 100 == 0 
-			if year % 400 == 0
-				true
-			else
-				false
-			end
-		else
-			true
-		end
-	else
-		false
-	end
-
-#this lines fails for years under 400
-#	year % 4 == 0 &&  year % 100 == 0 || year % 400 == 0
-#	year % 4 == 0 &&  year % 100 == 0 && year % 400 == 0
+	year % 4 == 0 &&  year % 100 != 0 || year % 400 == 0
 end
  
 def minutes_in_a_year(year)
@@ -45,12 +29,12 @@ def minutes_in_a_year(year)
 end
  
 def read_year(year, is_leap_year)
-	"Year #{year} has #{minutes_in_a_year(year)} minutes in the year and is #{is_leap_year ? "leap" : "not"} year."
+	"Year #{year} has #{minutes_in_a_year(year)} minutes in the year and is #{is_leap_year ? "" : "not"} a leap year."
 end
 
 puts "Enter a year: (q to quit, any string else for automatic)"
 while (input = gets.chomp) != "q"
-	if input.is_numeric?
+	if input.is_numeric_like?
 		is_leap_year = leap_year?(input)
 		puts "The year #{input} is #{"not " if not is_leap_year}a leap year."
 		puts read_year(input, is_leap_year)
