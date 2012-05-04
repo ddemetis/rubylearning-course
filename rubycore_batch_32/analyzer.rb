@@ -12,8 +12,8 @@ class TextAnalyzer
 			all_lines = file.readlines
 			@sentences = all_lines.join.split(/[.!?]/).count
 			@paragraphs = all_lines.join.split(/\r\n\r\n/).count
+			@lines = all_lines.count
 			all_lines.each do |line|
-				@lines += 1
 				@chars += line.size
 				@spaces += line.count(" ")
 				@tabs += line.count("\t")
