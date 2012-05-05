@@ -1,49 +1,45 @@
 #Text analyzer. receive a file and analyze it
 class TextAnalyzer
 	attr_accessor :charsx, :chars, :lines, :words, :sentences, :paragraphs, :avgwords, :avgsentences
-	attr_accessor :spaces, :newlines, :tabs, :cr
 
 	def initialize(file)
 		@file = file
 		@chars = @charsx = @lines = @words = @sentences = @paragraphs = @avgwords = @avgsentences = 0
-		@spaces = @newlines = @tabs = @cr = 0
-		
-		File.open(@file, "r") do |file|
-			all_lines = file.readlines
-			@sentences = all_lines.join.split(/[.!?]/).count
-			@paragraphs = all_lines.join.split(/\r\n\r\n/).count
-			@lines = all_lines.count
-			all_lines.each do |line|
+
+		file = File.new(@file, "r")
+			file.each_line do |line|			
+				@paragraphs += 1 if line.match(/^\r\n/)
+				@lines += 1
 				@chars += line.size
-				@spaces += line.count(" ")
-				@tabs += line.count("\t")
-				@cr += line.count("\r")
-				@words += line.split(" ").count
-				@charsx += (@chars - @spaces - @tabs - @cr - @newlines)
+				@charsx += line.scan(/\s/).count
+				@words += line.split(/ /).count
+				@sentences += line.scan(/[\.!?]/).count
 			end
-			@avgwords = (@words / @sentences || 0 )
-			@avgsentences = (@sentences / @paragraphs || 0)
-		end
+
+			@avgwords = @words / @sentences.to_f
+			@avgsentences = @sentences / @paragraphs.to_f
+
 	end
 
 	def analysis(formating = ": %0d")
-		puts 
-		puts "Analysis of file: #{@file}"
-		puts "=" * (18 + @file.size)
-		puts "Character count#{formating}" % @chars
-		puts "Character count excluding spaces#{formating}" % @charsx
-		puts "Line count#{formating}" % @lines
-		puts "Word count#{formating}" % @words
-		puts "Sentence count#{formating}" % @sentences
-		puts "Paragraph count#{formating}" % @paragraphs
-		puts "Average number of words per sentence#{formating}" % @avgwords
-		puts "Average number of sentences per paragraph#{formating}" % @avgsentences
+		<<-CONTENT
+			Analysis of file: #{@file }
+			#{"=" * (18 + @file.size) }
+			Character count#{formating % @chars }
+			Character count excluding spaces#{formating % (@chars - @charsx) }
+			Line count#{formating % @lines } 
+			Word count#{formating % @words }
+			Sentence count#{formating % @sentences }
+			Paragraph count#{formating % @paragraphs }
+			Average number of words per sentence#{": %0.2f" % @avgwords }
+			Average number of sentences per paragraph#{": %0.2f" % @avgsentences }
+		CONTENT
 	end
 end
 
 if ARGV[0] &&  File.exist?(ARGV[0])
 	analyzer = TextAnalyzer.new ARGV[0]
-	analyzer.analysis
+	puts analyzer.analysis
 else
 	puts "Cannot find filename."
   puts "usage: #{$0} <filename>"
