@@ -1,9 +1,6 @@
 class String
   def reverse_words
-    new_string = []
-    old_string = self.split(/[ \n]/)
-    old_string.length.times { new_string.push old_string.pop }
-    new_string.join(' ')
+    self.split(/[ \n]/).reverse_each.to_a.join(" ")
   end
 end
 

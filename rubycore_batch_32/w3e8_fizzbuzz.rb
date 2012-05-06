@@ -1,23 +1,14 @@
 
 def fizzbuzz
 	numbers = *(1..100)
-	numbers.collect do |number|
-		case
-			when number % 3 == 0 && number % 5 == 0
-				"FizzBuzz"
-			when number % 3 == 0 
-				"Fizz"
-			when number % 5 == 0
-				"Buzz"
-			else
-				number
-		end
+	numbers = numbers.collect do |number|
+    number_fizzbuzz = ''
+    number_fizzbuzz += 'Fizz' if number % 3 == 0
+    number_fizzbuzz += 'Buzz' if number % 5 == 0
+    number_fizzbuzz.size > 1 ? number_fizzbuzz : number
 	end
+  numbers.join("\n") + "\n"
 end
-
-
-puts fizzbuzz
-
 
 
 
@@ -32,6 +23,9 @@ Fizz\n67\n68\nFizz\nBuzz\n71\nFizz\n73\n74\nFizzBuzz\n76
 77\nFizz\n79\nBuzz\nFizz\n82\n83\nFizz\nBuzz\n86\nFizz\n88
 89\nFizzBuzz\n91\n92\nFizz\n94\nBuzz\nFizz\n97\n98\nFizz\nBuzz\n"
 
-b = fizzbuzz.join("\n") + "\n"
-puts "Same result = #{a == b}"
+
+
+b = fizzbuzz
+puts b
+puts "Is same result? #{a == b}"
 
