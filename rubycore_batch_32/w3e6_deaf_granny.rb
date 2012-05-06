@@ -1,6 +1,6 @@
 puts 'HELLO SONNY!'
-years = *(1930..1950)
-while (input = gets.chomp) != 'BYE'
+#years = *(1930..1950)
+until (input = gets.chomp) == 'BYE'
 	case input
 		when ''
 			puts 'HELLO SONNY! YOU THERE?'
