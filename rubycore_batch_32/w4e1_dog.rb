@@ -26,5 +26,7 @@ end
 
 d = Dog.new('Leo')
 
-d.eat.bark.chase_cat
-
+#d.eat.bark.chase_cat
+d.eat
+d.bark
+d.chase_cat

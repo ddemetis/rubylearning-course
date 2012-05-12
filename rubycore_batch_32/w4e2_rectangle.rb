@@ -15,7 +15,7 @@ class Rectangle
   end
 
   def format(value)
-    formatted ? ("%0.2f" % value.to_s).to_f : value 
+    formatted ? ("%0.2f" % value).round(2) : value 
   end
 
   def to_s
@@ -29,6 +29,6 @@ puts "Area is = #{r.area()}"
 puts "Perimeter is = #{r.perimeter}"
 
 r.formatted = true
-puts "The rectangle with sides of #{r.to_s} has a"
+puts "The rectangle with sides of #{r} has a"
 puts "perimeter of #{r.perimeter} and an area of #{r.area}"
 
