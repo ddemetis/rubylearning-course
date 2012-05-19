@@ -15,7 +15,7 @@ def swap_contents(file1, file2)
 end
 
 if ARGV[0] && ARGV[1]
-  if File.exist?(ARGV[0]) & File.exist?(ARGV[1])
+  if File.exist?(ARGV[0]) && File.exist?(ARGV[1])
     swap_contents(ARGV[0], ARGV[1])
   else
   puts "Filenames not found"

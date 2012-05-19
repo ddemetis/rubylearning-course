@@ -1,20 +1,28 @@
 
-quit_condition = []
+@quit_condition = 0
 
-puts 'HELLO SONNY!'
+def bye?(input)
+  input == 'BYE' ? @quit_condition += 1 : @quit_condition = 0
+  @quit_condition == 3
+end
 
-until quit_condition.size == 3
-  input = gets.chomp
-  input == 'BYE' ? quit_condition.push('BYE') : quit_condition = []
+def grandmas_response_to(input)
   case input
     when ''
-      puts 'HELLO SONNY! YOU THERE?'
+      'HELLO SONNY! YOU THERE?'
     when 'BYE'
-      puts 'CANT HEAR YOU SONNY!'
+      'CANT HEAR YOU SONNY!'
     when input.upcase
-      puts "NO, NOT SINCE #{rand(1930..1950)}!"
+      "NO, NOT SINCE #{rand(1930..1950)}!"
     else
-      puts 'HUH?!SPEAK UP, SONNY!'
+      'HUH?!SPEAK UP, SONNY!'
   end
 end
+
+
+puts 'HELLO SONNY!'
+until bye?(input = gets.chomp)
+  puts grandmas_response_to(input)
+end
 puts 'FAREWELL SONNY!'
+

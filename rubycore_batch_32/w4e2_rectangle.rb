@@ -11,7 +11,8 @@ class Rectangle
   end
 
   def perimeter
-    format(2 * x + 2 * y)
+#    format(2 * x + 2 * y)
+    formatted ? ("%0.2f" % (2 * x + 2 * y)).round(2) : (2 * x + 2 * y)
   end
 
   def format(value)
