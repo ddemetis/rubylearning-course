@@ -9,9 +9,10 @@ class UnpredictableString < String
       random_char = rand(string_size)
       self[i], self[random_char] = self[random_char], self[i]
     end
+    self
   end
 end
 
 some_string = UnpredictableString.new('It was a dark and stormy night.')
-some_string.scramble
-puts some_string
+puts some_string.scramble
+

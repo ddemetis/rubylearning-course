@@ -44,6 +44,8 @@ class Shape
         puts "rotating square 360 degrees the #{@name}"
       when Circle
         puts "rotating circle 360 degrees the #{@name}"
+      when Amoeba
+        puts "the #{@name} is rotating around its point "
       when Shape
         puts "rotating generic shape 360 degrees the #{@name}"
     end
@@ -55,8 +57,8 @@ end
 
 class Circle < Shape
   def initialize(name)
-    @aif_sound_file = 'circle.mp3'
     super
+    @aif_sound_file = 'circle.mp3'
   end
 
 #method overriding. play an .mp3 instead of .wav
@@ -68,20 +70,28 @@ end
 
 class Square < Shape
   def initialize(name)
-    @aif_sound_file = 'square.wav'
     super
+    @aif_sound_file = 'square.wav'
   end
 
 end
 
 class Triangle < Shape
   def initialize(name)
-    @aif_sound_file = 'triangle.wav'
     super
+    @aif_sound_file = 'triangle.wav'
   end
-
 end
 
+class Amoeba < Shape
+  def initialize(name)
+    super
+    @aif_sound_file = 'amoeba.hif'
+  end
+  def play_file
+    puts "playing hif file type this time #{@aif_sound_file}"
+  end
+end
 
 gui = Gui.new('AddressBook')
 gui.add Square.new('Enter Telephone')
@@ -98,4 +108,9 @@ puts
 
 puts 'Clicking the Triangle'
 gui.get_shape('Hang UP').on_click
+puts
+
+gui.add Amoeba.new('Amoeba')
+puts 'Clicking the Amoeba'
+gui.get_shape('Amoeba').on_click
 puts

@@ -28,7 +28,7 @@ class Dog
   end
 
   def method_missing(name, &block)
-    if @teached_tricks.has_key? name
+    if respond_to?(name)
       trick = @teached_tricks[name]
       instance_eval &trick
     else
@@ -36,6 +36,9 @@ class Dog
     end
   end
 
+  def respond_to?(method_name)
+    @teached_tricks.has_key? name
+  end
 end
 
 
