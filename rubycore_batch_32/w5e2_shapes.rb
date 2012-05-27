@@ -18,20 +18,24 @@ end
 
 #class to be inherited
 class Shape
-  attr_accessor :aif_sound_file, :name
+  attr_accessor :sound_file, :name
 
-  def initialize(name)
+  def initialize(name, sound_file = 'shape.aif')
     @name = name
-    @aif_sound_file = 'shape.wav'
+    @sound_file = sound_file
   end
 
   def on_click
-    rotate_clockwise
-    play_file
+    puts "Clicked the #{@name}"
+    puts rotate_clockwise
+    puts "sending sound file #{play_file} to player"
+    puts
   end
 
   def play_file
-    puts "playing sound file #{@aif_sound_file} of the shape #{@name}"
+    # call the aif_play_file with argument @sound_file
+    # return filename you are playing
+    @sound_file  
   end
 
 #demonstrating overloading a method
@@ -39,15 +43,15 @@ class Shape
     case self
       #in real scenario this would have been different rotating geometry
       when Triangle
-        puts "rotating triangle 360 degrees the #{@name}"
+        "rotating triangle 360 degrees the #{@name}"
       when Square
-        puts "rotating square 360 degrees the #{@name}"
+        "rotating square 360 degrees the #{@name}"
       when Circle
-        puts "rotating circle 360 degrees the #{@name}"
+        "rotating circle 360 degrees the #{@name}"
       when Amoeba
-        puts "the #{@name} is rotating around its point "
+        "the #{@name} is rotating around its point "
       when Shape
-        puts "rotating generic shape 360 degrees the #{@name}"
+        "rotating generic shape 360 degrees the #{@name}"
     end
   end
 
@@ -56,61 +60,41 @@ end
 #Inheritance
 
 class Circle < Shape
-  def initialize(name)
-    super
-    @aif_sound_file = 'circle.mp3'
-  end
-
 #method overriding. play an .mp3 instead of .wav
   def play_file
-    puts "playing mp3 file this time #{@aif_sound_file}"
+    # call the mp3_play_file with argument @sound_file
+    # return filename you are playing
+    @sound_file 
   end
-
 end
 
 class Square < Shape
-  def initialize(name)
-    super
-    @aif_sound_file = 'square.wav'
-  end
-
 end
 
 class Triangle < Shape
-  def initialize(name)
-    super
-    @aif_sound_file = 'triangle.wav'
-  end
 end
 
 class Amoeba < Shape
-  def initialize(name)
-    super
-    @aif_sound_file = 'amoeba.hif'
-  end
   def play_file
-    puts "playing hif file type this time #{@aif_sound_file}"
+    # call the hif_play_file with argument @sound_file
+    # return filename you are playing
+    @sound_file 
   end
 end
 
 gui = Gui.new('AddressBook')
-gui.add Square.new('Enter Telephone')
-gui.add Triangle.new('Hang UP')
-gui.add Circle.new('Call')
+gui.get_shape('Window').on_click
 
-puts 'Clicking the Square'
+gui.add Square.new('Enter Telephone', 'square.aif')
 gui.get_shape('Enter Telephone').on_click
-puts
 
-puts 'Clicking the Circle'
+
+gui.add Circle.new('Call','circle.mp3')
 gui.get_shape('Call').on_click
-puts
 
-puts 'Clicking the Triangle'
+gui.add Triangle.new('Hang UP', 'triangle.aif')
 gui.get_shape('Hang UP').on_click
-puts
 
-gui.add Amoeba.new('Amoeba')
-puts 'Clicking the Amoeba'
+gui.add Amoeba.new('Amoeba', 'amoeba.hif')
 gui.get_shape('Amoeba').on_click
-puts
+

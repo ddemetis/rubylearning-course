@@ -9,7 +9,7 @@ def irb_repl
 	until input == "q" 
 		input = "#{prompt}"
     begin
-		  puts eval(input)
+		  p eval(input)
     rescue
       puts "Syntax error"
     end
